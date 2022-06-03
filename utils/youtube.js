@@ -1,26 +1,7 @@
-const ytsr = require("ytsr");
 const ax = require("axios").default;
 const { UserAgent } = require("./index");
 
 class YouTube {
-	/**
-	 * Search on YouTube
-	 * @param {String} query Query to search
-	 * @param {"long"|"short"} type short or long duration
-	 */
-	async yts(query, type) {
-		if (!type) type = "short";
-		let final, data1, data2;
-		if (type === "long") {
-			data1 = await ytsr(query);
-			final = data1.videos;
-		} else if (type === "short") {
-			data2 = await ytsr(query);
-			final = data2.videos.filter((vid) => vid.seconds <= 240);
-		}
-		(data1 = null), (data2 = null);
-		return final;
-	}
 	/**
 	 * Download from YouTube
 	 * @param {String} url YouTube video url
