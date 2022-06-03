@@ -1,0 +1,19 @@
+{
+    "botName": "NZLBOT - PUBLIC",
+    "owner": [
+        "6281220439155@s.whatsapp.net"
+    ],
+    "openWeather": "6507c04b8f51f3b862e4f84bdfad8a1c",
+    "igCookie": "csrftoken=wchFqka0dFeqhX2aba7GX6KbQPkQcZTT; ds_user_id=53315206504; ig_did=3B6A4A60-2354-46F1-9A28-476C808197A3; mid=YoOW0wAEAAETEbPE1vy8HRk70EUU; rur=EAG; sessionid=53315206504%3A3dPNnKMzWCA7v9%3A24",
+    "session": "session-md.json",
+    "user_db": "users-db.json",
+    "chat_store": "baileys-store.json",
+    "timezone": "Asia/Jakarta",
+    "footer": "NZLBOT - WHATSAPP © 2020",
+    "musixmatch": "f69efcd1cef9fa5aecdd979672711d85",
+    "tier": {
+        "drakath": 200,
+        "nulgath": 500,
+        "artix": 999
+    }
+}
