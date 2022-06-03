@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://telegra.ph/file/fbe3160f0ad0e14abeeeb.jpg" width="150" height="150" border="0" alt="PFP">
+<img src="https://i.ibb.co/V3BDDFt/logo.jpg" width="150" height="150" border="0" alt="PFP">
 
 # Kaguya PublicBot - MD
 ### Use at your own risk!
