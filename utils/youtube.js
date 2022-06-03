@@ -1,4 +1,4 @@
-const ytsr = require("yt-search");
+const ytsr = require("ytsr");
 const ax = require("axios").default;
 const { UserAgent } = require("./index");
 
