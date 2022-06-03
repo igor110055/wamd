@@ -71,9 +71,9 @@ module.exports = {
 			let userData = user.getUser(msg.sender);
 			let str =
 				`Hello, ${pushName === undefined ? sender.split("@")[0] : pushName} 😊👏\n\n` +
-				`• Time: ${moment().format('HH:mm:ss')}\n• Tanggal: ${pasaran().asu}` +
-				`\n• Memory: ${formatSize(os.totalmem() - os.freemem())} / ${formatSize(os.totalmem())}\n• CPU: ${os.cpus()[0].model}${os.cpus().length > 1 ? " (" + os.cpus().length + "x)" : ""}\n\n` +
-				`» *Your Limit:* ${userData.limit} Limit - (${userData.type ? userData.type : "basic/Free"})\n\n` +
+				`⏰ Time: ${moment().format('HH:mm:ss')}\n📅 Tanggal: ${pasaran().asu}` +
+				`\n💻 Memory: ${formatSize(os.totalmem() - os.freemem())} / ${formatSize(os.totalmem())}\n🖥 CPU: ${os.cpus()[0].model}${os.cpus().length > 1 ? " (" + os.cpus().length + "x)" : ""}\n\n` +
+				`👤 *Your Limit:* ${userData.limit} Limit - (${userData.type ? userData.type : "basic/Free"})\n\n` +
 				`*💰 Donate :*\n` +
 				"*» Saweria:* _https://saweria.co/nafiz919_\n\n";
 			const keys = Object.keys(category);
