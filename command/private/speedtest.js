@@ -15,7 +15,16 @@ module.exports = {
                 acceptLicense: true,
                 acceptGdpr: true,
             });
-            let capt = `Your internet speed is ${speedText(st.download.bandwidth)} / ${speedText(st.upload.bandwidth)}`;
+            let capt = `📡Ｓｐｅｅｄｔｅｓｔ - Ｓｅｒｖｅｒ
+            
+» *Time     :* ${st.timestamp}
+» *Download :* ${speedText(st.download.bandwidth)}
+» *Upload   :* ${speedText(st.upload.bandwidth)}
+» *Isp      :* ${st.isp}
+» *Ping     :* ${st.ping.latency} ms
+
+[Result] : (${st.result.url})`;
+
             await msg.reply(capt);
 
         } catch (err) {
