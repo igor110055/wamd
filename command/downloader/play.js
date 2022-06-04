@@ -1,9 +1,10 @@
 const { generateWAMessageFromContent, proto } = require("@adiwajshing/baileys");
 const Downloader = require("../../utils/downloader");
-const { yt, yts } = new Downloader();
+const { yt } = new Downloader();
 const { fetchBuffer, fetchText } = require("../../utils");
 const { footer } = require("../../config.json");
 const xb = require("../../respon.json");
+const { default: axios } = require("axios");
 
 
 module.exports = {
@@ -13,8 +14,10 @@ module.exports = {
 	async exec({ sock, msg, args }) {
 		const { from, sender, pushName } = msg;
 		if (args.length < 1) return await msg.reply("No query given to search.");
-		const ytsData = await yts(args.join(" "), "short");
-		if (!ytsData.length > 0) return await msg.reply("No video found for that keyword, try another keyword");
+		const ytsr = await axios.get(`https://api-xcoders.xyz/api/search/youtube?query=${args.join(" ")}&apikey=xcoders`)
+		const ytsData = ytsr.data.result;
+		console.log(ytsData);
+		if (!ytsData.length < 0) return await msg.reply("No video found for that keyword, try another keyword");
 		let thumb = await fetchBuffer(ytsData[0].thumbnail);
 		const res = await yt(ytsData[0].url, "audio");
 		let restt = await fetchText(`https://tinyurl.com/api-create.php?url=${res.dl_link}`);
@@ -31,11 +34,10 @@ module.exports = {
 (1). *Title	:* ${ytsData[0].title}
 (2). *Extension	:* ${ytsData[0].type === "video" ? "mp4" : "mp3"}
 (3). *VideoID	:* ${ytsData[0].videoId}
-(4). *Published	:* ${ytsData[0].ago}
-(5). *FileSize	:* ${res.sizeF}
-(6). *Duration	:* ${ytsData[0].timestamp}
-(7). *Author	:* ${ytsData[0].author.name}
-(8). *Description	:* ${ytsData[0].description}
+(4). *Duration	:* ${ytsData[0].duration}
+(5). *Author	:* ${ytsData[0].author.name}
+(6). *Uploaded	:* ${ytsData[0].published_at}
+(7). *Description	:* ${ytsData[0].description}
   
 
 [📂 Download] : (${restt})\n\n`.trim(),
@@ -52,18 +54,17 @@ module.exports = {
 		// Sending message
 		await sock.relayMessage(from, prep.message, { messageId: prep.key.id }).then(async () => {
 			try {
-				if (res.size >= 75 << 10) {
+				if (res.size >= 120 << 10) {
 					let short = await fetchText(`https://tinyurl.com/api-create.php?url=${res.dl_link}`);
 					let capt = `🎧 ＹＯＵＴＵＢＥ ＰＬＡＹ
 
 (1). *Title	:* ${ytsData[0].title}
 (2). *Extension	:* ${ytsData[0].type === "video" ? "mp4" : "mp3"}
 (3). *VideoID	:* ${ytsData[0].videoId}
-(4). *Published	:* ${ytsData[0].ago}
-(5). *FileSize	:* ${res.sizeF}
-(6). *Duration	:* ${ytsData[0].timestamp}
-(7). *Author	:* ${ytsData[0].author.name}
-(8). *Description	:* ${ytsData[0].description}
+(4). *Duration	:* ${ytsData[0].duration}
+(5). *Author	:* ${ytsData[0].author.name}
+(6). *Uploaded	:* ${ytsData[0].published_at}
+(7). *Description	:* ${ytsData[0].description}
   
 
 [📂 Download Manual] : 
@@ -78,7 +79,7 @@ module.exports = {
 					);
 					let sections = [{ title: "Select result", rows: [] }];
 					for (let idx in ytsData) {
-						sections[0].rows.push({ title: "🎶 " + ytsData[idx].title , description: "	» Channel: " + ytsData[idx].author.name + '\n' + "	» Duration: " + ytsData[idx].timestamp, rowId: `#yta ${ytsData[idx].url}` });
+						sections[0].rows.push({ title: "🎶 " + ytsData[idx].title , description: "	» Channel: " + ytsData[idx].author.name + '\n' + "	» Duration: " + ytsData[idx].duration, rowId: `#yta ${ytsData[idx].url}` });
 					}
 					await sock.sendMessage(
 						from,
