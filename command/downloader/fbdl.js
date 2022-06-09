@@ -1,6 +1,10 @@
-const Downloader = require("../../utils/downloader");
-const { fbdl } = new Downloader();
-const xb = require("../../respon.json");
+// const Downloader = require("../../utils/downloader");
+// const { fbdl } = new Downloader();
+// const lang = require("../other/text.json");
+
+// const errMess = `ID:\n${lang.indo.util.download.fbFail}\n\nEN:\n${lang.eng.util.download.fbFail}`;
+
+const { default: axios } = require("axios");
 
 module.exports = {
 	name: "fb",
@@ -10,15 +14,14 @@ module.exports = {
 	category: "downloader",
 	desc: "Download Facebook video",
 	async exec({ sock, msg, args }) {
-		try {
-			if (!args.length > 0) return await msg.reply("No url provided");
-			let data = await fbdl(args[0]);
-
-			if (data.length === 0)
-				return await msg.reply(xb.notfound.trim());
-			await sock.sendMessage(msg.from, { video: { url: data[data.length - 1] }}, { quoted: msg });
+		if (!args.length > 0) return await msg.reply("*Example Used:*\n!fb *https://fb.watch/xxx* or !fb *https://www.facebook.com/CraftySchool/videos/xxx*");
+	try {
+			axios.get(`https://api.lolhuman.xyz/api/facebook?apikey=Papah-Chan&url=${args[0]}`).then(async ({ data }) => {
+				await sock.sendMessage(msg.from, { video: { url: data.result },mimetype: "video/mp4",
+				caption: `Request by ${msg.pushName}`, }, { quoted: msg });
+			})
 		} catch (e) {
-			await msg.reply(xb.error.trim());
+			await msg.reply(errMess);
 		}
 	},
 };

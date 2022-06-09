@@ -14,6 +14,7 @@ const {
 } = require("../../lib/tgl");
 const moment = require("moment-timezone");
 const Prem = require("../../event/database/Premium");
+const { default: axios } = require("axios");
 const user = new Prem();
 
 module.exports = {
@@ -69,10 +70,12 @@ module.exports = {
 				}
 			}
 			let userData = user.getUser(msg.sender);
+			const data = await axios.get(`https://api.lolhuman.xyz/api/checkapikey?apikey=Papah-Chan`)
 			let str =
 				`Hello, ${pushName === undefined ? sender.split("@")[0] : pushName} 😊👏\n\n` +
-				`⏰ Time: ${moment().format('HH:mm:ss')}\n📅 Tanggal: ${pasaran().asu}` +
-				`\n💻 Memory: ${formatSize(os.totalmem() - os.freemem())} / ${formatSize(os.totalmem())}\n🖥 CPU: ${os.cpus()[0].model}${os.cpus().length > 1 ? " (" + os.cpus().length + "x)" : ""}\n\n` +
+				`*⏰ Time:* ${new Date().toLocaleTimeString()}\n📅 Tanggal: ${pasaran().asu}` +
+				`*\n*📈 Request Today :* ${data.data.result.today}\n*📉 Total Request :* ${data.data.result.requests}` +
+				`\n*💻 Memory:* ${formatSize(os.totalmem() - os.freemem())} / ${formatSize(os.totalmem())}\n🖥 CPU: ${os.cpus()[0].model}${os.cpus().length > 1 ? " (" + os.cpus().length + "x)" : ""}\n\n` +
 				`👤 *Your Limit:* ${userData.limit} Limit - (${userData.type ? userData.type : "basic/Free"})\n\n` +
 				`*💰 Donate :*\n` +
 				"*» Saweria:* _https://saweria.co/nafiz919_\n\n";

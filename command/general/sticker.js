@@ -1,8 +1,6 @@
 const { sticker } = require("../../lib/convert");
 const lang = require("../other/text.json");
 const botName = require("../../config.json").botName;
-const { pasaran } = require("../../lib/tgl");
-
 
 module.exports = {
 	name: "sticker",
@@ -29,8 +27,8 @@ module.exports = {
                     withPackInfo: true, 
                     cmdType: "1",
                     packInfo: {
-                        packname: `───────────────\n\tCreated Sticker By  -  Nafizz\n\t\t\t\t\t\t\t\t\t•\n\t\t\t+62 857-9868-1637\n\t\t\t\t\t\t\t\t\t•\n\t\t\t${pasaran().asu}\n───────────────\n`,
-                        author: ""
+                        packname: ``,
+                        author: "Follow Bot Instagram :\n https://instagram.com/nzlbot"
                     }
                 });
                 await sock.sendMessage(from, { sticker: stickerBuff }, { quoted: msg });
@@ -45,8 +43,8 @@ module.exports = {
                         withPackInfo: true, 
                         cmdType: "1",
                         packInfo: {
-                            packname: `───────────────\n\tCreated Sticker By  -  Nafizz\n\t\t\t\t\t\t\t\t\t•\n\t\t\t+62 857-9868-1637\n\t\t\t\t\t\t\t\t\t•\n\t\t\t${pasaran().asu}\n───────────────\n`,
-                            author: ""
+                            packname: `Sticker By Nbots MD\n(+62 813-9868-1637)`,
+                            author: "Follow Bot Instagram :\n https://instagram.com/nzlbot"
                         }
                      });
                 await sock.sendMessage(from, { sticker: stickerBuff }, { quoted: msg });

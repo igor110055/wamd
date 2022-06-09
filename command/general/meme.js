@@ -4,7 +4,7 @@ const lang = require("../other/text.json");
 module.exports = {
 	name: "meme",
 	limit: true,
-	consume: 2,
+	consume: 1,
 	category: "general",
 	desc: "Add text to image",
 	use: "<teks>|<teks>\n\nEx:\n!meme atas|bawah",

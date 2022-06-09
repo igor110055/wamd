@@ -17,7 +17,6 @@ module.exports = {
 	premiumType: ["drakath", "nulgath", "artix"],
 	async exec({ msg, sock, args, arg, isOwner }) {
         try {
-        msg.reply("Please wait...")
         const { quoted, from, type } = msg;
         const content = JSON.stringify(quoted);
         const isMedia = type === "audioMessage";
@@ -26,7 +25,7 @@ module.exports = {
         const asu = fs.readFileSync("./temp/whatmusic.mp3");
         acr.identify(asu).then(metadata => {
             console.log(metadata.metadata.music[0]);
-            const rest = `*Data Pencarian Ditemukan!...*
+            const rest = `\`\`\`※ WhatsMusic\`\`\`
 
 \`\`\`» Title: ${metadata.metadata.music[0].title || '-'}\`\`\`
 \`\`\`» Label: ${metadata.metadata.music[0].label || '-'}\`\`\`

@@ -1,15 +1,14 @@
-const ocrtess = require('node-tesseract-ocr')
+const path = require('path');
+const {ocr, TesseractConfig} = require('ocr-search');
 const fs = require('fs')
 const consola = require('consola')
 
 module.exports = {
-    name: 'ocr',
-    alias: ['ocrtess'],
+    name: 'ocrs',
+    alias: ['ocrsearch'],
     category: 'premium',
     desc: 'Mengambil Teks di dalam Gambar',
-    use: 'Send Image and reply media with caption /ocr',
-    limit: true,
-    consume: 2,
+    use: 'Send Image and reply media with caption /ocrs',
     async exec({
         msg,
         args
@@ -32,29 +31,23 @@ module.exports = {
             const isSticker = type === "stickerMessage";
             const isQSticker = type === "extendedTextMessage" && content.includes("stickerMessage");
             if (!isQImage || !isMedia) {
-                msg.reply('Please wait...');
                 const image = isQImage ? await quoted.download() : await msg.download();
                 fs.writeFileSync(`./temp/${sender}.png`, image);
-                ocrtess.recognize(`./temp/${sender}.png`, ocrconf)
-                    .then(text => {
-                        msg.reply("```" + text.trim() + "```");
-                        fs.unlinkSync(`./temp/${sender}.png`);
-                    })
+                const babi = await ocr(`./temp/${sender}.png`, ocrconf, true);
+                msg.reply("```" + babi.trim() + "```");
+                fs.unlinkSync(`./temp/${sender}.png`);
             }  else if (!isQSticker || !isSticker) {
-                msg.reply('Please wait...');
                 const sticker = isQSticker ? await quoted.download() : await msg.download();
                 fs.writeFileSync(`./temp/${sender}.png`, sticker);
-                ocrtess.recognize(`./temp/${sender}.png`, ocrconf)
-                    .then(text => {
-                        msg.reply("```" + text.trim() + "```");
-                        fs.unlinkSync(`./temp/${sender}.png`);
-                    })
-                } else {
-                    msg.reply('Please send image or sticker');
-                }
+                const babi = await ocr(`./temp/${sender}.png`, ocrconf, true);
+                msg.reply("```" + babi.trim() + "```");
+                fs.unlinkSync(`./temp/${sender}.png`);
+            } else {
+                msg.reply('Please send image or sticker');
+            }
         } catch (e) {
             consola.error(e);
-            msg.reply(`Error while executing command: ${e}`);
+            msg.reply(`Error while processing: ${e}`);
         }
     }
 }

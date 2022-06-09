@@ -2,7 +2,7 @@ const { getBinaryNodeChild } = require("@adiwajshing/baileys");
 
 module.exports = {
 	name: "join",
-	isOwner: true,
+	owner: true,
 	category: "private",
 	desc: "Join to group using invite url.",
 	async exec({ sock, msg, args }) {
