@@ -4,20 +4,12 @@ const { checkData } = require("./database/group_setting");
 const Premium = require("./database/Premium");
 const djs = require("../lib/Collection");
 const { color } = require("../utils");
-// const { owner } = require("../config.json");
-const { owner } = process.env;
-
+const { owner } = require("../config.json");
 
 const cooldown = new djs.Collection();
 const prefix = "!";
 const user = new Premium();
 const multi_pref = new RegExp("^[" + "!#$%&?/;:,.<>~-+=".replace(/[|\\{}()[\]^$+*?.\-\^]/g, "\\$&") + "]");
-
-// Other Modules (Command)
-const Downloader = require("../utils/downloader");
-const { yt } = new Downloader();
-const { fetchText, textParse, fetchBuffer } = require("../utils");
-const { validateURL } = require("../utils/youtube-url-utils");
 
 function printSpam(isGc, sender, gcName) {
 	if (isGc) {
@@ -134,44 +126,6 @@ module.exports = chatHandler = async (m, sock) => {
 		} else {
 			body = "";
 		}
-		// Message Auto Detect Link Youtube{
-// 		if (msg.message.message.includes("youtube.com" || "youtu.be")) {
-// 			if (!args.length <1) return await msg.reply("Url tidak valid");
-// 			let { url, opt } = textParse(args.join(" "));
-// 			if (!validateURL(url)) return await msg.reply("Invalid URL");
-// 			await msg.reply(`*Tunggu Bentar Cuyyy....*`)
-
-// 			const res = await yt(url, "audio");
-// 			if (res === "no_file") return await msg.reply("No download link found, maybe try another link?");
-
-// 			if (res.size >= 75 << 10) {
-// 				let short = await fetchText(`https://tinyurl.com/api-create.php?url=${res.dl_link}`);
-// 				let capt =`🎙 ＹＯＵＴＵＢＥ ＡＵＤＩＯ
-
-// (1). *Title	:* ${res.title}
-// (2). *VideoID	:* ${res.id}
-// (3). *FileSize	:* ${res.sizeF}
-
-// [📂 Download] : (${short})`.trim();
-// 				await sock.sendMessage(msg.from, { image: { url: res.thumb }, caption: capt }, { quoted: msg });
-// 			} else {
-// 				await sock.sendMessage(
-// 					msg.from,
-// 					{
-// 						document: await fetchBuffer(res.dl_link, { skipSSL: true }),
-// 						mimetype: "audio/mpeg",
-// 						fileName: res.title + ".mp3",
-// 					},
-// 					{ quoted: msg }
-// 				);
-// 				await sock.sendMessage(
-// 					msg.from,
-// 					{ audio: await fetchBuffer(res.dl_link, { skipSSL: true }), mimetype: "audio/mpeg" },
-// 					{ quoted: msg }
-// 				);
-// 			}
-// 		}
-
 
 		const arg = body.substring(body.indexOf(" ") + 1);
 		const args = body.trim().split(/ +/).slice(1);

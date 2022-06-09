@@ -1,0 +1,13 @@
+{
+  "join": {
+    "msg": "Hadeh Beban Group nambah lagi Beban Group Mending Out %member",
+    "active": true
+  },
+  "left": {
+    "msg": "Alhamdulillah beban grup keluar %member",
+    "active": true
+  },
+  "link": {
+    "active": false
+  }
+}

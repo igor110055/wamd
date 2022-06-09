@@ -74,7 +74,7 @@ class Users {
 		let $path = join(__dirname, "users", filename ? filename : "users-db.json");
 		if (!filename) print(`'filename' is empty defaulting to '${basename($path)}'`);
 		await promises.writeFile($path, JSON.stringify(this.toArray(usersMap), null, "\t"));
-		print("write user db to: " + $path);
+		// print("write user db to: " + $path);
 	}
 	async readFromFile(filename) {
 		let $path = join(__dirname, "users", filename ? filename : "users-db.json");
