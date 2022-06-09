@@ -27,7 +27,7 @@ module.exports = {
                     withPackInfo: true, 
                     cmdType: "1",
                     packInfo: {
-                        packname: ``,
+                        packname: `Sticker By Nbots MD (+62 813-9868-1637)`,
                         author: "Follow Bot Instagram :\n https://instagram.com/nzlbot"
                     }
                 });
