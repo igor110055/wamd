@@ -18,8 +18,8 @@ const { default: axios } = require("axios");
 const user = new Prem();
 
 module.exports = {
-	name: "help",
-	alias: ["h", "cmd", "menu"],
+	name: "menu",
+    aliases: ["help", "h"],
 	category: "general",
 	async exec({
 		sock,
@@ -77,8 +77,8 @@ module.exports = {
 				`*\n*📈 Request Today :* ${data.data.result.today}\n*📉 Total Request :* ${data.data.result.requests}` +
 				`\n*💻 Memory:* ${formatSize(os.totalmem() - os.freemem())} / ${formatSize(os.totalmem())}\n🖥 CPU: ${os.cpus()[0].model}${os.cpus().length > 1 ? " (" + os.cpus().length + "x)" : ""}\n\n` +
 				`👤 *Your Limit:* ${userData.limit} Limit - (${userData.type ? userData.type : "basic/Free"})\n\n` +
-				`*💰 Donate :*\n` +
-				"*» Saweria:* _https://saweria.co/nafiz919_\n\n";
+				`*📣 Support Me On :*\n` +
+				" *» Saweria:* _https://saweria.co/nafiz919_\n *» Gopay/Dana : 081220439155\n\n";
 			const keys = Object.keys(category);
 			for (const key of keys) {
 				str += `╭──────❨ *${key.toUpperCase()}* ❩\n\`\`\`${category[key]

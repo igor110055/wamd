@@ -9,12 +9,10 @@ module.exports = {
 	name: "whatmusic",
 	desc: "Search Informasi Title Song",
 	use: "Send Audio and reply media with caption /whatmusic",
-    category: "premium",
+    category: "misc",
 	alias: ["wmusic"],
     limit: true,
     consume: 2,
-    premium: true,
-	premiumType: ["drakath", "nulgath", "artix"],
 	async exec({ msg, sock, args, arg, isOwner }) {
         try {
         const { quoted, from, type } = msg;

@@ -6,10 +6,8 @@ module.exports = {
 	name: "nowm",
 	limit: true,
 	consume: 1,
-	premium: true,
-	premiumType: ["drakath", "nulgath", "artix"],
 	alias: ["delwm", "wmdel"],
-	category: "premium",
+	category: "general",
 	desc: "Erase authorname, packanme and link 'view more'",
 	async exec({ sock, msg }) {
 		const { quoted, type, from } = msg;

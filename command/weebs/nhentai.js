@@ -4,10 +4,8 @@ module.exports = {
 	name: "nuke",
 	limit: true,
 	consume: 3,
-	premium: true,
-	premiumType: ["nulgath", "artix"],
 	alias: ["nhentai", "ncode"],
-	category: "premium",
+	category: "webs",
 	use: "<nuke code>",
 	async exec({ sock, msg, args }) {
 		const { from, isGroup } = msg;

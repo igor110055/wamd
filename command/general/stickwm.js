@@ -8,10 +8,9 @@ const lang = require("../other/text.json");
 
 module.exports = {
 	name: "swm",
-    premium: true,
-	premiumType: ["rakath", "nulgath", "artix"],
-	alias: ["stickerwm", "stickwm", "stikerwm", "stikwm"],
-	category: "premium",
+    limit: true,
+    consume: 1,
+	category: "general",
 	desc: "Create sticker with author and packname",
 	use: "packname|authorname",
 	async exec({ msg, arg, sock }) {

@@ -4,11 +4,9 @@ module.exports = {
 	name: "upload",
 	limit: true,
 	consume: 3,
-	premium: true,
-	premiumType: ["drakath", "nulgath", "artix"],
 	alias: ["upld"],
 	use: "*<hosting>*\nSend/Reply to a message media with caption\n\n" + "*Hosting*\n- telegraph\n- uguu\n- anonfiles",
-	category: "premium",
+	category: "misc",
 	async exec({ sock, msg, args }) {
 		const { from, quoted, type } = msg;
 		try {

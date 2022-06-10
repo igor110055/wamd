@@ -1,4 +1,8 @@
+const Downloader = require("../../utils/downloader");
+const { insta } = new Downloader();
+const lang = require("../other/text.json");
 const axios = require("axios").default;
+const errMes = `ID:\n${lang.indo.util.download.igFail}\n\nEN:\n${lang.eng.util.download.igFail}`;
 
 module.exports = {
 	name: "igdl",
@@ -10,16 +14,28 @@ module.exports = {
 	async exec({ sock, msg, args }) {
 		if (!args.length > 0) return await msg.reply("Ex: !igdl *instagram_url*");
 		try {
-			axios.get(`https://api.lolhuman.xyz/api/instagram?apikey=Papah-Chan&url=${args[0]}`).then (({ data }) => {
-				var url = data.result
-                if (url.includes('.mp4')) {
-					sock.sendMessage(msg.from, { video: { url: url}}, { quoted: msg})
-				} else {
-					sock.sendMessage(msg.from, { image: { url: url}}, { quoted: msg})
-				}
-			})
+			const ar = await insta(args[0]);
+			if (ar.uriType === "igHigh") {
+				const type = await fastCheck(ar.media[0].url);
+				let ext = /image/.test(type)
+					? { image: { url: ar.media[0].url } }
+					: { video: { url: ar.media[0].url } };
+				await sock.sendMessage(msg.from, { ...ext }, { quoted: msg });
+			} else if (ar.uriType === "igStory") {
+				const type = await fastCheck(ar.media[0].url);
+				let ext = /image/.test(type)
+					? { image: { url: ar.media[0].url } }
+					: { video: { url: ar.media[0].url } };
+				await sock.sendMessage(msg.from, { ...ext }, { quoted: msg });
+			} else {
+				ar.url.map(async (r) => {
+					const type = await fastCheck(r);
+					let ext = /image/.test(type) ? { image: { url: r } } : { video: { url: r } };
+					await sock.sendMessage(msg.from, { ...ext }, { quoted: msg });
+				});
+			}
 		} catch (e) {
-			await msg.reply("Error: " + e.message);
+			await msg.reply(errMes);
 		}
 	},
 };
